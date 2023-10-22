@@ -190,31 +190,273 @@
 <hr>
 <hr>
 <hr>
+    <div class="container text-white"><h1>To-Do List</h1>
+    <div>
+        <input type="text" id="task" placeholder="Enter a new task">
+        <button id="addTask">Add</button>
+    </div>
+    <ul id="taskList">
+        <!-- Tasks will be added here -->
+    </ul>
+    <script>
+        const taskInput = document.getElementById("task");
+        const addTaskButton = document.getElementById("addTask");
+        const taskList = document.getElementById("taskList");
+
+        // Function to add a new task
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === "") return;
+
+            const taskItem = document.createElement("li");
+            taskItem.innerHTML = `
+                <input type="checkbox">
+                <span>${taskText}</span>
+                <button>Delete</button>
+            `;
+
+            // Add event listener to mark task as complete
+            const checkbox = taskItem.querySelector("input");
+            checkbox.addEventListener("change", () => {
+                if (checkbox.checked) {
+                    taskItem.classList.add("completed");
+                } else {
+                    taskItem.classList.remove("completed");
+                }
+            });
+
+            // Add event listener to delete task
+            const deleteButton = taskItem.querySelector("button");
+            deleteButton.addEventListener("click", () => {
+                taskItem.remove();
+            });
+
+            taskList.appendChild(taskItem);
+            taskInput.value = "";
+        }
+
+        // Add event listener to the "Add" button
+        addTaskButton.addEventListener("click", addTask);
+
+        // Add event listener to the input field to allow pressing Enter
+        taskInput.addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+                addTask();
+            }
+        });
+    </script>
+    </div>
 <hr>
 <hr>
+<div class="container text-white">
+    <h1>Countdown Timer</h1>
+    <div>
+        <label for="duration">Set timer duration (seconds):</label>
+        <input type="number" id="duration" min="1" value="10">
+        <button id="startTimer">Start Timer</button>
+    </div>
+    <div id="timer">10</div>
+    <script>
+        const durationInput = document.getElementById("duration");
+        const startButton = document.getElementById("startTimer");
+        const timerDisplay = document.getElementById("timer");
+
+        startButton.addEventListener("click", () => {
+            const duration = parseInt(durationInput.value, 10);
+            if (duration >= 1) {
+                startCountdown(duration);
+            }
+        });
+
+        function startCountdown(duration) {
+            let timer = duration;
+            timerDisplay.textContent = timer;
+
+            const countdown = setInterval(function () {
+                timer--;
+                timerDisplay.textContent = timer;
+
+                if (timer <= 0) {
+                    clearInterval(countdown);
+                    timerDisplay.textContent = "Time's up!";
+                }
+            }, 1000);
+        }
+    </script>
+</div>
+<hr>
+<hr>
+<div class="container text-white">
+    <h1>Interactive Elements</h1>
+    
+    <h2>Buttons</h2>
+    <button id="showAlert">Show Alert</button>
+    
+    <h2>Tabs</h2>
+    <div id="tabContainer">
+        <button class="tabButton" onclick="openTab(event, 'Tab1')">Tab 1</button>
+        <button class="tabButton" onclick="openTab(event, 'Tab2')">Tab 2</button>
+        <button class="tabButton" onclick="openTab(event, 'Tab3')">Tab 3</button>
+        
+        <div id="Tab1" class="tabContent">Content for Tab 1</div>
+        <div id="Tab2" class="tabContent hidden">Content for Tab 2</div>
+        <div id="Tab3" class="tabContent hidden">Content for Tab 3</div>
+    </div>
+    
+    <h2>Accordion</h2>
+    <button class="accordion">Section 1</button>
+    <div class="panel">
+        <p>Content for Section 1.</p>
+    </div>
+    <button class="accordion">Section 2</button>
+    <div class="panel">
+        <p>Content for Section 2.</p>
+    </div>
+    <script>
+        // Buttons
+        const showAlertButton = document.getElementById("showAlert");
+        showAlertButton.addEventListener("click", () => {
+            alert("Button Clicked!");
+        });
+        
+        // Tabs
+        function openTab(event, tabName) {
+            const tabContents = document.getElementsByClassName("tabContent");
+            for (const tabContent of tabContents) {
+                tabContent.classList.remove("active");
+            }
+            
+            const tabButtons = document.getElementsByClassName("tabButton");
+            for (const tabButton of tabButtons) {
+                tabButton.classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+        
+        // Accordion
+        const accordions = document.getElementsByClassName("accordion");
+        for (const accordion of accordions) {
+            accordion.addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementElement;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+</div>
 <hr>
 <hr>
     <div class="container mt-4 mb-4 text-light">
         <h4 class="text-left">
             Ready to watch? Enter your email to create or restart your membership.
         </h4>
-        <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-dark">Submit</button>
-          </form>
+    <form id="myForm">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <p id="emailError" class="error"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <p id="passwordError" class="error"></p>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+    <script>
+        const form = document.getElementById("myForm");
+        const emailInput = document.getElementById("exampleInputEmail1");
+        const passwordInput = document.getElementById("exampleInputPassword1");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+
+        form.addEventListener("submit", function (e) {
+            let valid = true;
+
+            // Clear previous error messages
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            // Validate email
+            if (emailInput.value.trim() === "") {
+                emailError.textContent = "Email is required";
+                valid = false;
+            } else if (!isValidEmail(emailInput.value)) {
+                emailError.textContent = "Invalid email format";
+                valid = false;
+            }
+
+            // Validate password
+            if (passwordInput.value.trim() === "") {
+                passwordError.textContent = "Password is required";
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+
+        // Function to validate email using regular expression
+        function isValidEmail(email) {
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailPattern.test(email);
+        }
+    </script>
     </div>
+<hr>
+<div class="container text-white">
+    <h1>User Feedback</h1>
+
+    <button id="showSuccess">Show Success Alert</button>
+    <button id="showError">Show Error Alert</button>
+    
+    <div id="successAlert" class="alert success">Success! This is a success message.</div>
+    <div id="errorAlert" class="alert error">Error! Something went wrong.</div>
+    <script>
+        const successAlert = document.getElementById("successAlert");
+        const errorAlert = document.getElementById("errorAlert");
+
+        const showSuccessButton = document.getElementById("showSuccess");
+        showSuccessButton.addEventListener("click", () => {
+            showSuccessAlert("Success! This is a success message.");
+        });
+
+        const showErrorButton = document.getElementById("showError");
+        showErrorButton.addEventListener("click", () => {
+            showErrorAlert("Error! Something went wrong.");
+        });
+
+        function showSuccessAlert(message) {
+            successAlert.textContent = message;
+            successAlert.style.display = "block";
+
+            setTimeout(() => {
+                successAlert.style.display = "none";
+            }, 3000);
+        }
+
+        function showErrorAlert(message) {
+            errorAlert.textContent = message;
+            errorAlert.style.display = "block";
+
+            setTimeout(() => {
+                errorAlert.style.display = "none";
+            }, 3000);
+        }
+    </script>
+</div>
 <hr>
         <footer class="footer bg-dark text-white py-3"> 
             <div class="container"> 
