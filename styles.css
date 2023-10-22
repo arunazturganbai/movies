@@ -97,3 +97,37 @@ body {
     color:#fff
 }
 
+
+
+#timer {
+    font-size: 2rem;
+}
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+.active {
+    display: block;
+}
+
+.alert {
+    display: none;
+    padding: 10px;
+    background-color: #f2f2f2;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.success {
+    background-color: #4CAF50;
+    color: white;
+}
+.error {
+    background-color: #f44336;
+    color: white;
+}
