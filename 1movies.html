@@ -163,27 +163,89 @@
 <hr>
 <hr>
 <hr>
-        <div class="container mt-10 mb-10 text-light">
-            <h1 class="text-center">Frequently Asked Questions</h1>
-            <hr>
-            <div class="row">
-                <div class="col-sm-4">Is it free to use your streaming website?</div>
-                <div class="col-sm-8">Yes, our streaming website is completely free to use.</div>
-                <div class="w-100"></div>
-                <hr>
-                <div class="col"> Do I need to create an account to watch movies and series?</div>
-                <div class="col-sm-7">No, you can watch movies and series without creating an account.</div>
-                <div class="w-100"></div>
-                <hr>
-                <div class="col">How often do you update your movie and series collection?</div>
-                <div class="col-sm-7">We update our collection regularly with new content.</div>
-                <div class="w-100"></div>
-                <hr>
-                <div class="col">Can I watch content on your website from my mobile device?</div>
-                <div class="col-sm-7">Yes, our website is mobile-friendly, and you can watch on your phone or tablet.</div>
-              </div>
+    <div class="container">
+        <h1 class="text-center">Frequently Asked Questions</h1>
+        <button class="accordion">Is it free to use your streaming website?</button>
+        <div class="panel">
+          <p>Yes, our streaming website is completely free to use.</p>
         </div>
-    
+        
+        <button class="accordion">Do I need to create an account to watch movies and series?</button>
+        <div class="panel">
+          <p>No, you can watch movies and series without creating an account.</p>
+        </div>
+        
+        <button class="accordion">How often do you update your movie and series collection?</button>
+        <div class="panel">
+          <p>We update our collection regularly with new content.</p>
+        </div>
+    </div>
+    <script>
+    var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            /* Toggle between adding and removing the "active" class,
+            to highlight the button that controls the panel */
+            this.classList.toggle("active");
+        
+            /* Toggle between hiding and showing the active panel */
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        }
+        </script>
+    <hr>
+        <div class="container text-light">
+            <h1 class="text-center">Genres</h1>
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, '1 Question')">Action</button>
+                <button class="tablinks" onclick="openCity(event, '2 Question')">Comedy</button>
+                <button class="tablinks" onclick="openCity(event, '3 Question')">Horror</button>
+              </div>
+              
+              <!-- Tab content -->
+              <div id="1 Question" class="tabcontent">
+                <h3>Action</h3>
+                <p>Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats.</p>
+              </div>
+              
+              <div id="2 Question" class="tabcontent">
+                <h3>Comedy</h3>
+                <p>A comedy film is a category of film which emphasizes on humor.</p>
+              </div>
+              
+              <div id="3 Question" class="tabcontent">
+                <h3>Horror</h3>
+                <p>Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes.</p>
+              </div>
+              <script>function openCity(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+              
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+                }
+              
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+              
+                // Show the current tab, and add an "active" class to the button that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+              }
+              </script>
+        </div>
             
     </main>
     <hr>
@@ -286,72 +348,6 @@
 </div>
 <hr>
 <hr>
-<div class="container text-white">
-    <h1>Interactive Elements</h1>
-    
-    <h2>Buttons</h2>
-    <button id="showAlert">Show Alert</button>
-    
-    <h2>Tabs</h2>
-    <div id="tabContainer">
-        <button class="tabButton" onclick="openTab(event, 'Tab1')">Tab 1</button>
-        <button class="tabButton" onclick="openTab(event, 'Tab2')">Tab 2</button>
-        <button class="tabButton" onclick="openTab(event, 'Tab3')">Tab 3</button>
-        
-        <div id="Tab1" class="tabContent">Content for Tab 1</div>
-        <div id="Tab2" class="tabContent hidden">Content for Tab 2</div>
-        <div id="Tab3" class="tabContent hidden">Content for Tab 3</div>
-    </div>
-    
-    <h2>Accordion</h2>
-    <button class="accordion">Section 1</button>
-    <div class="panel">
-        <p>Content for Section 1.</p>
-    </div>
-    <button class="accordion">Section 2</button>
-    <div class="panel">
-        <p>Content for Section 2.</p>
-    </div>
-    <script>
-        // Buttons
-        const showAlertButton = document.getElementById("showAlert");
-        showAlertButton.addEventListener("click", () => {
-            alert("Button Clicked!");
-        });
-        
-        // Tabs
-        function openTab(event, tabName) {
-            const tabContents = document.getElementsByClassName("tabContent");
-            for (const tabContent of tabContents) {
-                tabContent.classList.remove("active");
-            }
-            
-            const tabButtons = document.getElementsByClassName("tabButton");
-            for (const tabButton of tabButtons) {
-                tabButton.classList.remove("active");
-            }
-            
-            document.getElementById(tabName).classList.add("active");
-            event.currentTarget.classList.add("active");
-        }
-        
-        // Accordion
-        const accordions = document.getElementsByClassName("accordion");
-        for (const accordion of accordions) {
-            accordion.addEventListener("click", function() {
-                this.classList.toggle("active");
-                const panel = this.nextElementElement;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-    </script>
-</div>
-<hr>
-<hr>
     <div class="container mt-4 mb-4 text-light">
         <h4 class="text-left">
             Ready to watch? Enter your email to create or restart your membership.
@@ -415,6 +411,11 @@
         }
     </script>
     </div>
+<hr>
+<div class="container">
+    <div class="ball"></div>
+</div>
+
 <hr>
 <div class="container text-white">
     <h1>User Feedback</h1>
